@@ -47,7 +47,7 @@
 <script>
 import marked from 'marked'
 import axios from 'axios'
-import docs from '@/docs.json'
+import docs from '../../../data/docs.json'
 import links from '@/links.json'
 const powers = [
   'PSD to HTML', 'SPA', 'H5'
@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     loadMD (doc, show = false) {
-      axios.get(doc.path)
+      axios.get(doc.path.replace('web/docs/', `http://${location.hostname}/`))
         .then(({ data }) => {
           this.show = show
           this.$refs['markdown'].innerHTML = marked(data)
